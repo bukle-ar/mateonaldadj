@@ -410,15 +410,6 @@ img {
   stroke: currentColor;
 }
 
-.btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  min-width: 140px;
-}
-
 /* ═══════════════════════════════════════
    FOOTER
 ═══════════════════════════════════════ */
@@ -801,36 +792,47 @@ img {
 /* ═══════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════ */
+/* ── TABLET ── */
 @media (max-width: 768px) {
-  .header {
-    padding: 1rem 1.5rem;
-  }
-
   .hero__content {
-    padding: 0 1.5rem 4rem;
+    padding: 0 1.5rem 3rem;
   }
 
-  .actions {
-    padding: 4rem 1.5rem;
+  .hero__title {
+    font-size: clamp(3rem, 14vw, 5rem);
   }
 
-.actions__grid {
-    flex-wrap: nowrap;
-    justify-content: center;
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .btn {
-    flex: 0 1 auto;
-    text-align: center;
-    font-size: 0.65rem;
-    padding: 0.8rem 1.2rem;
-    letter-spacing: 0.2em;
+  .carousel-wrapper {
+    padding-top: 2rem;
   }
 
   .carousel-card {
     width: 42vw;
+    min-width: 160px;
+  }
+
+  .actions {
+    padding: 2rem 1.5rem 3rem;
+  }
+
+  .actions__grid {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    gap: 0.6rem;
+  }
+
+  .btn {
+    flex: 0 1 auto;
+    font-size: 0.6rem;
+    padding: 0.8rem 1.2rem;
+    letter-spacing: 0.15em;
+    min-width: 120px;
+  }
+
+  .btn__icon svg {
+    width: 12px;
+    height: 12px;
   }
 
   .modal {
@@ -841,27 +843,133 @@ img {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .venues__list {
-    grid-template-columns: 1fr;
-  }
-
   .footer {
     padding: 2rem 1.5rem;
     flex-direction: column;
     text-align: center;
   }
-
-  .nav-social {
-    gap: 1rem;
-  }
 }
 
+/* ── MOBILE ── */
 @media (max-width: 480px) {
+  .hero {
+    min-height: 500px;
+  }
+
+  .hero__content {
+    padding: 0 1.2rem 2.5rem;
+  }
+
   .hero__title {
-    font-size: 3rem;
+    font-size: clamp(2.5rem, 16vw, 4rem);
+  }
+
+  .hero__subtitle {
+    font-size: 0.7rem;
+    margin-top: -0.8rem;
+  }
+
+  .carousel-wrapper {
+    padding-top: 1rem;
+  }
+
+  .carousel-card {
+    width: 55vw;
+    min-width: 140px;
+    aspect-ratio: 3/4;
+  }
+
+  .carousel-track {
+    gap: 0.8rem;
+  }
+
+  .actions {
+    padding: 1.5rem 1rem 3rem;
+    gap: 1rem;
+  }
+
+  .actions__divider {
+    height: 20px;
+  }
+
+  .actions__label {
+    font-size: 0.55rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .actions__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .btn {
+    min-width: 0;
+    width: 100%;
+    padding: 0.7rem 0.5rem;
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+  }
+
+  .btn__icon {
+    margin-bottom: 0.3rem;
+  }
+
+  .btn__icon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .modal {
+    padding: 4rem 1rem 2rem;
   }
 
   .modal__title {
-    font-size: 2.2rem;
+    font-size: 2rem;
+  }
+
+  .modal__header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+  }
+
+  .modal-gallery__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .presskit__text {
+    font-size: 0.9rem;
+  }
+
+  .rider__text {
+    font-size: 0.9rem;
+  }
+
+  .venues__cat-grid {
+    gap: 0.4rem;
+  }
+
+  .venue-card {
+    padding: 0.5rem 0.8rem;
+  }
+
+  .venue-card__name {
+    font-size: 0.75rem;
+  }
+
+  .footer {
+    padding: 1.5rem 1rem;
+  }
+
+  .footer__copy {
+    font-size: 0.6rem;
+  }
+
+  .hero__gradient {
+    background:
+      linear-gradient(to bottom, transparent 0%, transparent 30%, var(--bg-primary) 100%),
+      linear-gradient(to right, rgba(10,10,10,0.4) 0%, transparent 50%, rgba(10,10,10,0.4) 100%);
   }
 }
