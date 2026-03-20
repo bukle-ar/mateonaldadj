@@ -18,19 +18,47 @@
     whatsappMessage: 'Hola Mateo, quiero consultar por contrataciones',
     instagram: 'mateonalda',
 
-    venues: [
-      { name: 'Crobar', location: 'Buenos Aires' },
-      { name: 'Mandarine', location: 'Buenos Aires' },
-      { name: 'Niceto Club', location: 'Buenos Aires' },
-      { name: 'La Estación', location: 'Córdoba' },
-      { name: 'Club Bahrein', location: 'Buenos Aires' },
-      { name: 'Avant Garden', location: 'Buenos Aires' },
-      { name: 'Privilege', location: 'Mar del Plata' },
-      { name: 'La Casa del Árbol', location: 'Mendoza' },
-      { name: 'Rosario Beach Club', location: 'Rosario' },
-      { name: 'Under Club', location: 'Buenos Aires' },
-      { name: 'Terrazas del Este', location: 'Buenos Aires' },
-      { name: 'Cosquín Rock', location: 'Córdoba' },
+venueCategories: [
+      {
+        title: 'Buenos Aires',
+        venues: [
+          'Cruza Recoleta', 'Cruza Polo', 'La Mala Pub', 'The Laundry Soho',
+          'Behind Palermo', 'Kika Club', 'Bayside', 'Brandy San Isidro',
+          'Abraham', 'Distrito Federal Bar', 'Burro Bar', 'Heart Costanera',
+          'Podesta', 'La Tincho Fierro', 'Tamarisco', 'Fiebre Fiesta',
+          'Zegre', 'Renee', 'Enero Costanera', 'Caix', 'Darren Adrogue',
+          'Porto Soho', 'Cobra', 'Mil Vidas', 'Costa 7070', 'Aribau',
+          'Maldini', 'Archi Club'
+        ]
+      },
+      {
+        title: 'Interior',
+        venues: [
+          'Luxx — Villa Carlos Paz',
+          'Living — Ushuaia',
+          'Level — Río Grande',
+          'La Morena — Río Grande',
+          'Valhalla — Saladillo',
+          'Yes! — Santa Rosa',
+          'Vacilon — Santa Rosa',
+          'Búnker — Azul',
+          'Sirius — Laprida'
+        ]
+      },
+      {
+        title: 'Eventos Destacados',
+        venues: [
+          'After Polo × Palermo Polo',
+          'La Voz Argentina × Jecan',
+          'La Sirenita El Show × Jecan',
+          'Matías Bottero × Jecan',
+          'Legalmente Rubia × Jecan',
+          'Luzu TV × Jecan',
+          'Tigre Rugby Fiestas',
+          'Cerro Castor × Corona',
+          'Cerro Castor After Ski'
+        ]
+      }
     ],
 
     slideCount: 5,
@@ -60,11 +88,8 @@
      DOM REFERENCES
   ───────────────────────────────────── */
   const loader        = $('#loader');
-  const header        = $('#header');
   const carouselTrack = $('#carouselTrack');
-  const indicators    = $$('.carousel-indicators__dot');
   const btnTrayectoria    = $('#btnTrayectoria');
-  const footerTrayectoria = $('#footerTrayectoria');
   const modal         = $('#modalTrayectoria');
   const modalClose    = $('#modalClose');
   const venuesList    = $('#venuesList');
@@ -88,58 +113,24 @@
   /* ─────────────────────────────────────
      CAROUSEL
   ───────────────────────────────────── */
-  const initCarousel = () => {
-    // Duplicar slides para loop infinito
-    const slides = carouselTrack.querySelectorAll('.carousel-slide');
-    slides.forEach((slide) => {
-      const clone = slide.cloneNode(true);
-      carouselTrack.appendChild(clone);
-    });
+  
+const initCarousel = () => {
+    const cards = carouselTrack.querySelectorAll('.carousel-card');
+    const cardCount = cards.length;
 
-    carouselTrack.style.setProperty('--slide-count', CONFIG.slideCount);
-
-    // Tracking del slide activo para indicadores
-    let currentSlide = 0;
-
-    const updateIndicator = () => {
-      const trackRect = carouselTrack.getBoundingClientRect();
-      const offset = Math.abs(trackRect.left);
-      const slideWidth = window.innerWidth;
-      currentSlide = Math.floor((offset / slideWidth) % CONFIG.slideCount);
-
-      indicators.forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentSlide);
+    // Multiplicar cards x5 para loop infinito sin cortes
+    for (let i = 0; i < 4; i++) {
+      cards.forEach((card) => {
+        carouselTrack.appendChild(card.cloneNode(true));
       });
-    };
+    }
 
-    setInterval(updateIndicator, 500);
-
-    // Click en indicador para saltar a slide
-    indicators.forEach((dot) => {
-      dot.addEventListener('click', () => {
-        const idx = parseInt(dot.dataset.index, 10);
-
-        carouselTrack.style.animation = 'none';
-        void carouselTrack.offsetHeight; // force reflow
-        carouselTrack.style.transform = `translateX(-${idx * 100}vw)`;
-
-        setTimeout(() => {
-          carouselTrack.style.transform = '';
-          carouselTrack.style.animation = `carouselScroll ${CONFIG.carouselSpeed}s linear infinite`;
-        }, 3000);
-      });
-    });
+    carouselTrack.style.setProperty('--card-count', cardCount);
   };
-
 
   /* ─────────────────────────────────────
      HEADER SCROLL BEHAVIOR
   ───────────────────────────────────── */
-  const initHeaderScroll = () => {
-    window.addEventListener('scroll', () => {
-      header.classList.toggle('scrolled', window.scrollY > 60);
-    }, { passive: true });
-  };
 
 
   /* ─────────────────────────────────────
@@ -162,16 +153,22 @@
   /* ─────────────────────────────────────
      VENUES RENDER
   ───────────────────────────────────── */
-  const renderVenues = () => {
-    venuesList.innerHTML = CONFIG.venues
-      .map((v) => `
-        <div class="venue-card">
-          <p class="venue-card__name">${escapeHTML(v.name)}</p>
-          <p class="venue-card__location">${escapeHTML(v.location)}</p>
+const renderVenues = () => {
+    venuesList.innerHTML = CONFIG.venueCategories
+      .map((cat) => `
+        <div class="venues__category">
+          <h4 class="venues__cat-title">${escapeHTML(cat.title)}</h4>
+          <div class="venues__cat-grid">
+            ${cat.venues.map((v) => `
+              <div class="venue-card">
+                <p class="venue-card__name">${escapeHTML(v)}</p>
+              </div>
+            `).join('')}
+          </div>
         </div>
       `)
       .join('');
-  };
+  };  
 
 
   /* ─────────────────────────────────────
@@ -196,10 +193,6 @@
     // Event listeners
     btnTrayectoria.addEventListener('click', openModal);
 
-    footerTrayectoria.addEventListener('click', (e) => {
-      e.preventDefault();
-      openModal();
-    });
 
     modalClose.addEventListener('click', closeModal);
 
@@ -220,6 +213,73 @@
   /* ─────────────────────────────────────
      SECURITY: Sanitize external links
   ───────────────────────────────────── */
+
+  /* ─────────────────────────────────────
+     LIGHTBOX (galería ampliar foto)
+  ───────────────────────────────────── */
+
+  /* ─────────────────────────────────────
+     MODAL (Rider Técnico)
+  ───────────────────────────────────── */
+  const initRiderModal = () => {
+    const btnRider = $('#btnRider');
+    const modalRider = $('#modalRider');
+    const riderClose = $('#riderClose');
+
+    const openRider = () => {
+      modalRider.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      riderClose.focus();
+    };
+
+    const closeRider = () => {
+      modalRider.classList.remove('open');
+      document.body.style.overflow = '';
+      btnRider.focus();
+    };
+
+    btnRider.addEventListener('click', openRider);
+    riderClose.addEventListener('click', closeRider);
+    modalRider.addEventListener('click', (e) => {
+      if (e.target === modalRider) closeRider();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalRider.classList.contains('open')) {
+        closeRider();
+      }
+    });
+  };
+
+  const initLightbox = () => {
+    const lightbox = $('#lightbox');
+    const lightboxImg = $('#lightboxImg');
+    const lightboxClose = $('#lightboxClose');
+
+    // Click en cualquier foto de la galería
+    document.addEventListener('click', (e) => {
+      const galleryImg = e.target.closest('.modal-gallery__item img');
+      if (galleryImg) {
+        lightboxImg.src = galleryImg.src;
+        lightbox.classList.add('open');
+      }
+    });
+
+    const closeLightbox = () => {
+      lightbox.classList.remove('open');
+      lightboxImg.src = '';
+    };
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('open')) {
+        closeLightbox();
+      }
+    });
+  };
+
   const sanitizeLinks = () => {
     $$('a[target="_blank"]').forEach((link) => {
       link.setAttribute('rel', 'noopener noreferrer');
@@ -230,13 +290,14 @@
   /* ─────────────────────────────────────
      INIT — Arranque de toda la aplicación
   ───────────────────────────────────── */
-  const init = () => {
+const init = () => {
     initLoader();
     initCarousel();
-    initHeaderScroll();
     initScrollReveal();
     renderVenues();
     initModal();
+    initRiderModal();
+    initLightbox();
     sanitizeLinks();
   };
 
