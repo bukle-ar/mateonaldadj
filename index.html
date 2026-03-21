@@ -11,11 +11,11 @@
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; script-src 'self';">
   <title>Mateo Nalda DJ</title>
 
   <!-- Favicon placeholder (reemplazar con favicon real) -->
-  <link rel="icon" type="img" href="img/logos/favicon.PNG">
+  <link rel="icon" type="image/png" href="img/logos/favicon.PNG">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -105,7 +105,7 @@
   <!-- ═══ FOOTER ═══ -->
 <footer class="footer">
     <p class="footer__copy">&copy; 2026 Mateo Nalda. Todos los derechos reservados.</p>
-    <p class="footer__credit">Diseñado por <span class="footer__credit-link">Bukle</span> | Agencia de Software e IA</p>    <!--<p class="footer__credit">Diseñado por <a href="https://bukle-ar.github.io" target="_blank" rel="noopener noreferrer" class="footer__credit-link">Bukle</a> | Agencia de Soluciones Inteligentes</p>-->
+    <p class="footer__credit">Diseñado por <span class="footer__credit-link">Bukle</span> | Agencia de Software e IA</p>    
   </footer>
 
   <!-- ═══ TRAYECTORIA MODAL ═══ -->
@@ -150,41 +150,37 @@
         <h3 class="modal-gallery__heading">Galería</h3>
         <div class="modal-gallery__grid">
           <!--
-            Reemplazar src con fotos reales. Recomendado: 600x450px JPG.
-            Ubicar en /img/gallery/
+
           -->
-          <div class="modal-gallery__item">
+<div class="modal-gallery__item">
             <img src="img/trayectoria/trayectoria1.jpeg" alt="Mateo Nalda en vivo" loading="lazy"
-              onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27600%27 height=%27450%27%3E%3Crect fill=%27%23151520%27 width=%27600%27 height=%27450%27/%3E%3Ctext x=%27300%27 y=%27235%27 text-anchor=%27middle%27 font-family=%27Georgia%27 font-size=%2716%27 fill=%27%23444%27%3EGALERÍA 1%3C/text%3E%3C/svg%3E'">
+              data-fallback="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27600%27 height=%27450%27%3E%3Crect fill=%27%23151520%27 width=%27600%27 height=%27450%27/%3E%3Ctext x=%27300%27 y=%27235%27 text-anchor=%27middle%27 font-family=%27Georgia%27 font-size=%2716%27 fill=%27%23444%27%3EGALERÍA 1%3C/text%3E%3C/svg%3E">
           </div>
           <div class="modal-gallery__item">
             <img src="img/trayectoria/trayectoria2.jpg" alt="Mateo Nalda backstage" loading="lazy"
-              onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27600%27 height=%27450%27%3E%3Crect fill=%27%23181825%27 width=%27600%27 height=%27450%27/%3E%3Ctext x=%27300%27 y=%27235%27 text-anchor=%27middle%27 font-family=%27Georgia%27 font-size=%2716%27 fill=%27%23444%27%3EGALERÍA 2%3C/text%3E%3C/svg%3E'">
+              data-fallback="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27600%27 height=%27450%27%3E%3Crect fill=%27%23181825%27 width=%27600%27 height=%27450%27/%3E%3Ctext x=%27300%27 y=%27235%27 text-anchor=%27middle%27 font-family=%27Georgia%27 font-size=%2716%27 fill=%27%23444%27%3EGALERÍA 2%3C/text%3E%3C/svg%3E">
           </div>
           <div class="modal-gallery__item">
             <img src="img/trayectoria/trayectoria3.jpeg" alt="Mateo Nalda en festival" loading="lazy"
-              onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27600%27 height=%27450%27%3E%3Crect fill=%27%23131322%27 width=%27600%27 height=%27450%27/%3E%3Ctext x=%27300%27 y=%27235%27 text-anchor=%27middle%27 font-family=%27Georgia%27 font-size=%2716%27 fill=%27%23444%27%3EGALERÍA 3%3C/text%3E%3C/svg%3E'">
+              data-fallback="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27600%27 height=%27450%27%3E%3Crect fill=%27%23131322%27 width=%27600%27 height=%27450%27/%3E%3Ctext x=%27300%27 y=%27235%27 text-anchor=%27middle%27 font-family=%27Georgia%27 font-size=%2716%27 fill=%27%23444%27%3EGALERÍA 3%3C/text%3E%3C/svg%3E">
           </div>
           <div class="modal-gallery__item">
             <img src="img/trayectoria/trayectoria4.jpeg" alt="Mateo Nalda DJ set" loading="lazy"
-              onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27600%27 height=%27450%27%3E%3Crect fill=%27%23161628%27 width=%27600%27 height=%27450%27/%3E%3Ctext x=%27300%27 y=%27235%27 text-anchor=%27middle%27 font-family=%27Georgia%27 font-size=%2716%27 fill=%27%23444%27%3EGALERÍA 4%3C/text%3E%3C/svg%3E'">
+              data-fallback="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27600%27 height=%27450%27%3E%3Crect fill=%27%23161628%27 width=%27600%27 height=%27450%27/%3E%3Ctext x=%27300%27 y=%27235%27 text-anchor=%27middle%27 font-family=%27Georgia%27 font-size=%2716%27 fill=%27%23444%27%3EGALERÍA 4%3C/text%3E%3C/svg%3E">
           </div>
           <div class="modal-gallery__item">
             <img src="img/trayectoria/trayectoria5.jpeg" alt="Mateo Nalda en club" loading="lazy"
-              onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27600%27 height=%27450%27%3E%3Crect fill=%27%23141424%27 width=%27600%27 height=%27450%27/%3E%3Ctext x=%27300%27 y=%27235%27 text-anchor=%27middle%27 font-family=%27Georgia%27 font-size=%2716%27 fill=%27%23444%27%3EGALERÍA 5%3C/text%3E%3C/svg%3E'">
+              data-fallback="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27600%27 height=%27450%27%3E%3Crect fill=%27%23141424%27 width=%27600%27 height=%27450%27/%3E%3Ctext x=%27300%27 y=%27235%27 text-anchor=%27middle%27 font-family=%27Georgia%27 font-size=%2716%27 fill=%27%23444%27%3EGALERÍA 5%3C/text%3E%3C/svg%3E">
           </div>
           <div class="modal-gallery__item">
             <img src="img/trayectoria/trayectoria6.jpeg" alt="Mateo Nalda evento" loading="lazy"
-              onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27600%27 height=%27450%27%3E%3Crect fill=%27%23171726%27 width=%27600%27 height=%27450%27/%3E%3Ctext x=%27300%27 y=%27235%27 text-anchor=%27middle%27 font-family=%27Georgia%27 font-size=%2716%27 fill=%27%23444%27%3EGALERÍA 6%3C/text%3E%3C/svg%3E'">
+              data-fallback="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27600%27 height=%27450%27%3E%3Crect fill=%27%23171726%27 width=%27600%27 height=%27450%27/%3E%3Ctext x=%27300%27 y=%27235%27 text-anchor=%27middle%27 font-family=%27Georgia%27 font-size=%2716%27 fill=%27%23444%27%3EGALERÍA 6%3C/text%3E%3C/svg%3E">
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- JavaScript -->
-
-  <!-- ═══ LIGHTBOX ═══ -->
+  
 
   <!-- ═══ RIDER TÉCNICO MODAL ═══ -->
   <div class="modal-overlay" id="modalRider" role="dialog" aria-modal="true" aria-labelledby="riderTitle">
@@ -220,15 +216,15 @@
         <div class="modal-gallery__grid">
           <div class="modal-gallery__item">
             <img src="img/rider/rider-01.png" alt="Setup DJ" loading="lazy"
-              onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27600%27 height=%27450%27%3E%3Crect fill=%27%23151520%27 width=%27600%27 height=%27450%27/%3E%3Ctext x=%27300%27 y=%27235%27 text-anchor=%27middle%27 font-family=%27Georgia%27 font-size=%2716%27 fill=%27%23444%27%3ERIDER 1%3C/text%3E%3C/svg%3E'">
+              data-fallback="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27600%27 height=%27450%27%3E%3Crect fill=%27%23151520%27 width=%27600%27 height=%27450%27/%3E%3Ctext x=%27300%27 y=%27235%27 text-anchor=%27middle%27 font-family=%27Georgia%27 font-size=%2716%27 fill=%27%23444%27%3ERIDER 1%3C/text%3E%3C/svg%3E">
           </div>
           <div class="modal-gallery__item">
             <img src="img/rider/rider-02.png" alt="Equipamiento DJ" loading="lazy"
-              onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27600%27 height=%27450%27%3E%3Crect fill=%27%23181825%27 width=%27600%27 height=%27450%27/%3E%3Ctext x=%27300%27 y=%27235%27 text-anchor=%27middle%27 font-family=%27Georgia%27 font-size=%2716%27 fill=%27%23444%27%3ERIDER 2%3C/text%3E%3C/svg%3E'">
+              data-fallback="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27600%27 height=%27450%27%3E%3Crect fill=%27%23181825%27 width=%27600%27 height=%27450%27/%3E%3Ctext x=%27300%27 y=%27235%27 text-anchor=%27middle%27 font-family=%27Georgia%27 font-size=%2716%27 fill=%27%23444%27%3ERIDER 2%3C/text%3E%3C/svg%3E">
           </div>
           <div class="modal-gallery__item">
             <img src="img/rider/rider-03.png" alt="Cabina DJ" loading="lazy"
-              onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27600%27 height=%27450%27%3E%3Crect fill=%27%23131322%27 width=%27600%27 height=%27450%27/%3E%3Ctext x=%27300%27 y=%27235%27 text-anchor=%27middle%27 font-family=%27Georgia%27 font-size=%2716%27 fill=%27%23444%27%3ERIDER 3%3C/text%3E%3C/svg%3E'">
+              data-fallback="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27600%27 height=%27450%27%3E%3Crect fill=%27%23131322%27 width=%27600%27 height=%27450%27/%3E%3Ctext x=%27300%27 y=%27235%27 text-anchor=%27middle%27 font-family=%27Georgia%27 font-size=%2716%27 fill=%27%23444%27%3ERIDER 3%3C/text%3E%3C/svg%3E">
           </div>
         </div>
       </div>

@@ -1,22 +1,11 @@
-/**
- * ═══════════════════════════════════════
- *  MATEO NALDA — DJ Website
- *  main.js — Core application logic
- * ═══════════════════════════════════════
- */
 
 (() => {
   'use strict';
 
-  /* ─────────────────────────────────────
-     CONFIGURACIÓN CENTRAL
-     Toda la data editable está acá para
-     facilitar futura administración.
-  ───────────────────────────────────── */
   const CONFIG = {
-    whatsapp: '5491100000000',
-    whatsappMessage: 'Hola Mateo, quiero consultar por contrataciones',
-    instagram: 'mateonalda',
+    whatsapp: '5492964600490',
+    whatsappMessage: 'Hola Mateo, quiero consultar por contrataciones.',
+    instagram: 'mateo.nalda',
 
 venueCategories: [
       {
@@ -61,32 +50,19 @@ venueCategories: [
       }
     ],
 
-    slideCount: 5,
-    carouselSpeed: 30, // seconds per full cycle
     loaderDuration: 1800, // ms
   };
 
 
-  /* ─────────────────────────────────────
-     UTILIDADES
-  ───────────────────────────────────── */
   const $ = (selector) => document.querySelector(selector);
   const $$ = (selector) => document.querySelectorAll(selector);
 
-  /**
-   * Escapa HTML para prevenir XSS al insertar
-   * contenido dinámico en el DOM.
-   */
   const escapeHTML = (str) => {
     const div = document.createElement('div');
     div.textContent = str;
     return div.innerHTML;
   };
 
-
-  /* ─────────────────────────────────────
-     DOM REFERENCES
-  ───────────────────────────────────── */
   const loader        = $('#loader');
   const carouselTrack = $('#carouselTrack');
   const btnTrayectoria    = $('#btnTrayectoria');
@@ -94,10 +70,6 @@ venueCategories: [
   const modalClose    = $('#modalClose');
   const venuesList    = $('#venuesList');
 
-
-  /* ─────────────────────────────────────
-     LOADER
-  ───────────────────────────────────── */
   const initLoader = () => {
     document.body.style.overflow = 'hidden';
 
@@ -109,16 +81,11 @@ venueCategories: [
     });
   };
 
-
-  /* ─────────────────────────────────────
-     CAROUSEL
-  ───────────────────────────────────── */
   
 const initCarousel = () => {
     const cards = carouselTrack.querySelectorAll('.carousel-card');
     const cardCount = cards.length;
 
-    // Multiplicar cards x5 para loop infinito sin cortes
     for (let i = 0; i < 4; i++) {
       cards.forEach((card) => {
         carouselTrack.appendChild(card.cloneNode(true));
@@ -128,14 +95,6 @@ const initCarousel = () => {
     carouselTrack.style.setProperty('--card-count', cardCount);
   };
 
-  /* ─────────────────────────────────────
-     HEADER SCROLL BEHAVIOR
-  ───────────────────────────────────── */
-
-
-  /* ─────────────────────────────────────
-     SCROLL REVEAL (Intersection Observer)
-  ───────────────────────────────────── */
   const initScrollReveal = () => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -149,10 +108,6 @@ const initCarousel = () => {
     $$('.reveal').forEach((el) => observer.observe(el));
   };
 
-
-  /* ─────────────────────────────────────
-     VENUES RENDER
-  ───────────────────────────────────── */
 const renderVenues = () => {
     venuesList.innerHTML = CONFIG.venueCategories
       .map((cat) => `
@@ -170,38 +125,28 @@ const renderVenues = () => {
       .join('');
   };  
 
-
-  /* ─────────────────────────────────────
-     MODAL (Trayectoria)
-  ───────────────────────────────────── */
   const initModal = () => {
     const openModal = () => {
       modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
 
-      // Focus trap: mover focus al primer elemento interactivo
       const focusable = modal.querySelectorAll('button, a, [tabindex]');
       if (focusable.length) focusable[0].focus();
     };
 
     const closeModal = () => {
       modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
       btnTrayectoria.focus();
     };
 
-    // Event listeners
     btnTrayectoria.addEventListener('click', openModal);
-
-
     modalClose.addEventListener('click', closeModal);
-
-    // Cerrar al hacer click fuera del contenido
     modal.addEventListener('click', (e) => {
       if (e.target === modal) closeModal();
     });
-
-    // Cerrar con Escape
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && modal.classList.contains('open')) {
         closeModal();
@@ -209,31 +154,21 @@ const renderVenues = () => {
     });
   };
 
-
-  /* ─────────────────────────────────────
-     SECURITY: Sanitize external links
-  ───────────────────────────────────── */
-
-  /* ─────────────────────────────────────
-     LIGHTBOX (galería ampliar foto)
-  ───────────────────────────────────── */
-
-  /* ─────────────────────────────────────
-     MODAL (Rider Técnico)
-  ───────────────────────────────────── */
   const initRiderModal = () => {
     const btnRider = $('#btnRider');
     const modalRider = $('#modalRider');
     const riderClose = $('#riderClose');
 
-    const openRider = () => {
+  const openRider = () => {
       modalRider.classList.add('open');
+      modalRider.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
       riderClose.focus();
     };
 
-    const closeRider = () => {
+  const closeRider = () => {
       modalRider.classList.remove('open');
+      modalRider.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
       btnRider.focus();
     };
@@ -255,11 +190,11 @@ const renderVenues = () => {
     const lightboxImg = $('#lightboxImg');
     const lightboxClose = $('#lightboxClose');
 
-    // Click en cualquier foto de la galería
     document.addEventListener('click', (e) => {
       const galleryImg = e.target.closest('.modal-gallery__item img');
       if (galleryImg) {
         lightboxImg.src = galleryImg.src;
+        lightboxImg.alt = galleryImg.alt || 'Foto ampliada';
         lightbox.classList.add('open');
       }
     });
@@ -280,16 +215,29 @@ const renderVenues = () => {
     });
   };
 
+  const initImageFallbacks = () => {
+    document.querySelectorAll('img[data-fallback]').forEach((img) => {
+      const applyFallback = () => {
+        if (!img.dataset.failed) {
+          img.dataset.failed = 'true';
+          img.src = img.dataset.fallback;
+        }
+      };
+
+      img.addEventListener('error', applyFallback);
+
+      if (img.complete && img.naturalWidth === 0) {
+        applyFallback();
+      }
+    });
+  };
+
   const sanitizeLinks = () => {
     $$('a[target="_blank"]').forEach((link) => {
       link.setAttribute('rel', 'noopener noreferrer');
     });
   };
 
-
-  /* ─────────────────────────────────────
-     INIT — Arranque de toda la aplicación
-  ───────────────────────────────────── */
 const init = () => {
     initLoader();
     initCarousel();
@@ -298,10 +246,10 @@ const init = () => {
     initModal();
     initRiderModal();
     initLightbox();
+    initImageFallbacks();
     sanitizeLinks();
   };
 
-  // Ejecutar cuando el DOM esté listo
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
