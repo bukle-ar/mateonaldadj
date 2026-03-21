@@ -491,6 +491,42 @@ img {
   color: var(--accent);
 }
 
+.footer__credit {
+  font-size: 0.6rem;
+  font-weight: 300;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  width: 100%;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.footer__credit-link {
+  color: var(--accent);
+  transition: color 0.3s;
+}
+
+.footer__credit-link:hover {
+  color: var(--text-primary);
+}
+
+@media (min-width: 769px) {
+  .footer {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer__copy {
+    font-size: 0.8rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .footer__credit {
+    font-size: 0.8rem;
+  }
+}
+
 /* ═══════════════════════════════════════
    TRAYECTORIA MODAL
 ═══════════════════════════════════════ */
